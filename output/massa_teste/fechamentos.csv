@@ -1,0 +1,22 @@
+﻿id;data;senha;fila;nome;acompanhantes;medium;chave
+1;2026-10-17;N-001;N;Teste Ana;1;Médium fictício;teste ana
+2;2026-10-17;N-002;N;Teste José;2;Médium fictício;teste jose
+3;2026-10-17;N-003;N;Teste Bruno;0;Médium fictício;teste bruno
+4;2026-10-17;E-001;N;Teste Carla;1;Médium fictício;teste carla
+5;2026-10-17;E-002;N;Teste Davi;2;Médium fictício;teste davi
+6;2026-10-17;P-001;P;Teste Eva;1;Médium fictício;teste eva
+7;2026-10-17;P-002;P;Teste Fabio;2;Médium fictício;teste fabio
+8;2026-10-17;A-001;N;Teste Gabi;1;Médium fictício;teste gabi
+9;2026-11-07;N-001;N; teste  ANA ;1;Médium fictício;teste ana
+10;2026-11-07;N-002;N;TESTE JOSE;2;Médium fictício;teste jose
+11;2026-11-07;N-003;N;Teste Hugo;0;Médium fictício;teste hugo
+12;2026-11-07;N-004;N;;1;Médium fictício;
+13;2026-11-07;E-001;N;Teste Iris;1;Médium fictício;teste iris
+14;2026-11-07;P-001;P;Teste Julia;1;Médium fictício;teste julia
+15;2026-11-07;P-002;P;Teste Kai;2;Médium fictício;teste kai
+16;2026-11-07;P-003;P;Teste Lia;0;Médium fictício;teste lia
+17;2026-11-07;A-001;N;Teste Mauro;1;Médium fictício;teste mauro
+18;2026-11-07;A-002;N;Teste Nina;2;Médium fictício;teste nina
+19;2026-11-22;N-001;N;Teste Fora Calendario;1;Médium fictício;teste fora calendario
+20;2026-11-22;N-002;N;Teste Fora Calendario Dois;2;Médium fictício;teste fora calendario dois
+21;2026-12-05;P-001;P;Teste Futuro;1;Médium fictício;teste futuro
