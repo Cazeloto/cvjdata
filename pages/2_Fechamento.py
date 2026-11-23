@@ -87,9 +87,13 @@ with general:
     if selected.empty:
         st.info('Ainda não há fechamentos em datas oficiais para os filtros selecionados.')
     else:
-        daily = selected.groupby(['data', 'tipo', 'gira'], as_index=False).agg(
-            registros=('id', 'size'), acompanhantes=('acompanhantes', lambda s: s.sum(min_count=1)))
-        st.plotly_chart(style_chart(px.bar(daily, x='data', y='registros', color='tipo', labels={'data':'Data', 'registros':'Consulentes', 'tipo':'Tipo'})), width='stretch')
+        daily = summarize_closings(selected)
+        chart_daily = daily.rename(columns={'data':'Data', 'tipo':'Tipo', 'gira':'Gira'})
+        chart_daily['Data'] = pd.to_datetime(chart_daily['Data']).dt.strftime('%d/%m/%Y')
+        chart_daily['Normal+A'] = daily['normais'] + daily['acompanhantes_normais']
+        chart_daily['Preferencial+A'] = daily['preferenciais'] + daily['acompanhantes_preferenciais']
+        chart_daily['Desistiu+A'] = daily['nao_apareceu'] + daily['acompanhantes_nao_apareceu']
+        st.plotly_chart(style_chart(px.bar(chart_daily, x='Data', y=['Normal+A','Preferencial+A','Desistiu+A'], barmode='group', labels={'value':'Pessoas', 'variable':'Fila'})), width='stretch')
         left, right = st.columns(2)
         with left:
             counts = selected.assign(fila=selected['fila'].fillna('Sem fila')).groupby('fila').size().reset_index(name='Registros')
@@ -98,7 +102,7 @@ with general:
             counts = selected.assign(medium=selected['medium'].fillna('').str.strip().replace('', 'Não informado')).groupby('medium').size().reset_index(name='Registros')
             st.plotly_chart(style_chart(px.bar(counts, x='Registros', y='medium', labels={'medium':'Médium'}, orientation='h')), width='stretch')
         st.subheader('Consolidado por gira')
-        display = daily.rename(columns={'data':'Data', 'tipo':'Tipo', 'gira':'Gira', 'registros':'Consulentes', 'acompanhantes':'Acompanhantes'})
+        display = chart_daily[['Data','Tipo','Gira','Normal+A','Preferencial+A','Desistiu+A']]
         st.dataframe(display, hide_index=True, width='stretch')
         st.download_button('Baixar consolidado CSV', display.to_csv(index=False, sep=';', date_format='%d/%m/%Y').encode('utf-8-sig'), 'fechamento_giras.csv', 'text/csv')
         if selected['acompanhantes'].isna().any():
